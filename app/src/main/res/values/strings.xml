@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Sortowanka</string>
+    <string name="b_belkowe">Bąbelkowe</string>
+    <string name="ile_razy">Ile razy</string>
+    <string name="ile_elementow">Ile elementow</string>
+    <string name="heapsort">Heapsort</string>
+    <string name="czas">Czas:</string>
+    <string name="wstawianie">Wstawianie</string>
+    <string name="szybkie">Szybkie</string>
+    <string name="scalanie">Scalanie</string>
 </resources>
