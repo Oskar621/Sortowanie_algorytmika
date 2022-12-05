@@ -1,11 +1,11 @@
 package com.example.sortowanka
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -15,24 +15,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val liczby: MutableList<Int> = mutableListOf()
-        val czas_wstawianie = findViewById<TextView>(R.id.czas_wstawianie)
-        val czas_bubble = findViewById<TextView>(R.id.czas_bubble)
-        val czas_fast = findViewById<TextView>(R.id.czas_fast)
-        val czas_heapsort = findViewById<TextView>(R.id.czas_heapsort)
-        val czas_scal = findViewById<TextView>(R.id.czas_scal)
-        val ilosc_razy = findViewById<EditText>(R.id.ile_razy).text
-        val ilosc_elementow = findViewById<EditText>(R.id.ile_elementow).text
+        val czasWstawianie = findViewById<TextView>(R.id.czas_wstawianie)
+        val czasBubble = findViewById<TextView>(R.id.czas_bubble)
+        val czasFast = findViewById<TextView>(R.id.czas_fast)
+        val czasHeapsort = findViewById<TextView>(R.id.czas_heapsort)
+        val czasScal = findViewById<TextView>(R.id.czas_scal)
+        val iloscRazy = findViewById<EditText>(R.id.ile_razy).text
+        val iloscElementow = findViewById<EditText>(R.id.ile_elementow).text
         val sortuj = findViewById<Button>(R.id.sortuj)
 
         sortuj.setOnClickListener {
+            //czyszczenie listy
             liczby.clear()
-            if(ilosc_elementow.isNotEmpty() && ilosc_razy.isNotEmpty()) {
-                if(ilosc_elementow.toString().toInt() >= 1)
-                for (i in 1..ilosc_elementow.toString().toInt())
+            //losowanie liczb do listy
+            if(iloscElementow.isNotEmpty() && iloscRazy.isNotEmpty()) {
+                if(iloscElementow.toString().toInt() >= 1)
+                for (i in 1..iloscElementow.toString().toInt())
                     liczby.add(Random.nextInt(1,50))
+
+            //sortowanie przez wstawianie
+            for(i in 1 .. liczby.size+1)
+            {
+                val pom = liczby[i]
+                var j = i-1
+                while (j>=0 && liczby[j]>pom)
+                {
+                    liczby[j+1] = liczby[j]
+                    j-=1
+                }
+                liczby[j+1] = pom
+            }
                 Toast.makeText(applicationContext, liczby.toString(), Toast.LENGTH_SHORT).show()
             }
-
         }
-
-}}
+    }
+}
