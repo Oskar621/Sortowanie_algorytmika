@@ -87,11 +87,11 @@
         android:layout_height="wrap_content"
         android:text="@string/b_belkowe"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintEnd_toStartOf="@+id/txt_czas2"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sort_wstaw"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <TextView
         android:id="@+id/sort_heapsort"
@@ -99,11 +99,11 @@
         android:layout_height="wrap_content"
         android:text="@string/heapsort"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintEnd_toStartOf="@+id/txt_czas4"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sort_fast"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
         android:id="@+id/sort_scal"
@@ -112,11 +112,11 @@
         android:layout_marginTop="8dp"
         android:text="@string/scalanie"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintEnd_toStartOf="@+id/txt_czas5"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sort_heapsort"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.056" />
 
     <TextView
         android:id="@+id/sort_fast"
@@ -124,11 +124,11 @@
         android:layout_height="wrap_content"
         android:text="@string/szybkie"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintEnd_toStartOf="@+id/txt_czas3"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sort_bubble"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/sort_wstaw"
@@ -136,11 +136,11 @@
         android:layout_height="wrap_content"
         android:text="@string/wstawianie"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintEnd_toStartOf="@+id/txt_czas"
+        app:layout_constraintHorizontal_bias="0.389"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.033" />
 
     <EditText
         android:id="@+id/ile_elementow"
