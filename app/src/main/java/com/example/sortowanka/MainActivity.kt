@@ -1,20 +1,19 @@
 package com.example.sortowanka
 
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.base.Stopwatch
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -29,8 +28,10 @@ class MainActivity : AppCompatActivity() {
         val sortuj = findViewById<Button>(R.id.sortuj)
 
         sortuj.setOnClickListener {
+
             //czyszczenie listy
             liczby.clear()
+
             //losowanie liczb do listy
             if (iloscElementow.isNotEmpty() && iloscRazy.isNotEmpty()) {
                 if (iloscElementow.toString().toInt() >= 1)
@@ -38,11 +39,7 @@ class MainActivity : AppCompatActivity() {
                         liczby.add(Random.nextInt(1, 50))
 
                 //sortowanie przez wstawianie
-                val c1: Calendar = Calendar.getInstance()
-                c1.set(Calendar.MONTH, 11)
-                c1.set(Calendar.DATE, 5)
-                c1.set(Calendar.YEAR, 1996)
-                val dateOne: Date = c1.getTime()
+                var sw : Stopwatch = Stopwatch.createStarted()
                 var tablica: MutableList<Int> = mutableListOf()
                 for(r in 1 ..iloscRazy.toString().toInt())
                 {
@@ -59,10 +56,32 @@ class MainActivity : AppCompatActivity() {
                     }
                     tablica = liczby
                 }
-                val dateTwo: Date = c1.getTime()
-                val wynik: Int = dateTwo.toString().toInt() - dateOne.toString().toInt()
-                czasWstawianie.text = wynik.toString()
+                var elapsedMillis: Long = sw.elapsed(TimeUnit.NANOSECONDS)
+                czasWstawianie.text = "$elapsedMillis ns"
+
+
+                //sortowanie babelkowe
+
+                val sw2: Stopwatch = Stopwatch.createStarted()
+                for (r in 1 .. iloscRazy.toString().toInt())
+                {
+                    for(currentPosition in 0 until (tablica.size -1)) {
+                        if( tablica[currentPosition] > tablica[currentPosition+1]) {
+                            val tmp = tablica[currentPosition]
+                            tablica[currentPosition] = tablica[currentPosition+1]
+                            tablica[currentPosition+1] = tmp
+                        }
+                    }
+                    Toast.makeText(applicationContext, tablica.toString(), Toast.LENGTH_SHORT)
+                    tablica = liczby
+                }
+                elapsedMillis = sw2.elapsed(TimeUnit.NANOSECONDS)
+                czasBubble.text = "$elapsedMillis ns"
+
+
             }
+
+
         }
     }
 }
