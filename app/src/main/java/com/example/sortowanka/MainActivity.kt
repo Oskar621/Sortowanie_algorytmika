@@ -27,8 +27,45 @@ class MainActivity : AppCompatActivity() {
         val iloscElementow = findViewById<EditText>(R.id.ile_elementow).text
         val sortuj = findViewById<Button>(R.id.sortuj)
 
-        sortuj.setOnClickListener {
+            fun quickSort(arr: MutableList<Int>, low: Int, high: Int)
+            {
+                var pivot = arr[high];
+                var i = (low - 1);
 
+                for (j in low until high-1) {
+                    if (arr[j] < pivot) {
+                        i++
+                        val pom = arr[i]
+                        arr[i] = arr[j]
+                        arr[j] = arr[i]
+                    }
+                val pom = arr[i+1]
+                arr[i+1] = arr[high]
+                arr[high] = pom
+                }
+            }
+
+
+        fun quicksort_prep(arr: List<Int>)
+        {
+            val low = arr.first()
+            val high = arr.last()
+            if(low < high)
+            {
+                val pivot = arr.size/2
+                var tab1: MutableList<Int> = mutableListOf()
+                var tab2: MutableList<Int> = mutableListOf()
+                for (i in 0 until pivot-1)
+                    tab1.add(arr[i])
+                for (j in pivot until arr.size)
+                    tab2.add(arr[j])
+                quickSort(tab1, low, high)
+                quickSort(tab2, low, high)
+            }
+        }
+
+
+        sortuj.setOnClickListener {
             //czyszczenie listy
             liczby.clear()
 
@@ -72,15 +109,24 @@ class MainActivity : AppCompatActivity() {
                             tablica[currentPosition+1] = tmp
                         }
                     }
-                    Toast.makeText(applicationContext, tablica.toString(), Toast.LENGTH_SHORT)
                     tablica = liczby
                 }
                 elapsedMillis = sw2.elapsed(TimeUnit.NANOSECONDS)
                 czasBubble.text = "$elapsedMillis ns"
 
+                //sortowanie szybkie
 
+                val sw3: Stopwatch = Stopwatch.createStarted()
+
+                for (r in 1 until iloscRazy.toString().toInt())
+                {
+                    quicksort_prep(tablica)
+                    tablica = liczby
+                }
+                val elaspedMillis = sw3.elapsed(TimeUnit.NANOSECONDS)
+                czasFast.text = "$elapsedMillis ns"
+                Toast.makeText(applicationContext, tablica.toString(), Toast.LENGTH_SHORT)
             }
-
 
         }
     }
