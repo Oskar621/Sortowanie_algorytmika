@@ -27,43 +27,39 @@ class MainActivity : AppCompatActivity() {
         val iloscElementow = findViewById<EditText>(R.id.ile_elementow).text
         val sortuj = findViewById<Button>(R.id.sortuj)
 
-            fun quickSort(arr: MutableList<Int>, low: Int, high: Int)
-            {
-                var pivot = arr[high];
-                var i = (low - 1);
-
-                for (j in low until high-1) {
-                    if (arr[j] < pivot) {
-                        i++
-                        val pom = arr[i]
-                        arr[i] = arr[j]
-                        arr[j] = arr[i]
-                    }
-                val pom = arr[i+1]
-                arr[i+3] = arr[high]
-                arr[high] = pom
+            fun quickSort(array: MutableList<Int>, left: Int, right: Int) {
+                val index = partition (array, left, right)
+                if(left < index-1) { // 2) Sorting left half
+                    quickSort(array, left, index-1)
+                }
+                if(index < right) { // 3) Sorting right half
+                    quickSort(array,index, right)
                 }
             }
 
-
-        fun quicksort_prep(arr: List<Int>)
-        {
-            val low = arr.first()
-            val high = arr.last()
-
-            if(low >= high)
-            {
-                val pivot = arr.size/2
-                var tab1: MutableList<Int> = mutableListOf()
-                var tab2: MutableList<Int> = mutableListOf()
-                for (i in 0 until pivot-1)
-                    tab1.add(arr[i])
-                for (j in pivot until arr.size)
-                    tab2.add(arr[j])
-                quickSort(tab1, low, high)
-                quickSort(tab2, low, high)
+            fun swapArray(a: IntArray, b: Int, c: Int) {
+                val temp = a[b]
+                a[b] = a[c]
+                a[c] = temp
             }
-        }
+            fun partition(array: IntArray, l: Int, r: Int): Int {
+                var left = l
+                var right = r
+                val pivot = array[(left + right)/2] // 4) Pivot Point
+                while (left <= right) {
+                    while (array[left] < pivot) left++ // 5) Find the elements on left that should be on right
+
+                    while (array[right] > pivot) right-- // 6) Find the elements on right that should be on left
+
+                    // 7) Swap elements, and move left and right indices
+                    if (left <= right) {
+                        swapArray(array, left,right)
+                        left++
+                        right--
+                    }
+                }
+                return left
+            }
 
 
         sortuj.setOnClickListener {
@@ -121,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
                 for (r in 1 until iloscRazy.toString().toInt())
                 {
-                    quicksort_prep(tablica)
+                    quickSort(tablica,0,tablica.size-1)
                     tablica = liczby
                 }
                 val elaspedMillis = sw3.elapsed(TimeUnit.NANOSECONDS)
