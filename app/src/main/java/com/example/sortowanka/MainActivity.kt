@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                         arr[j] = arr[i]
                     }
                 val pom = arr[i+1]
-                arr[i+1] = arr[high]
+                arr[i+3] = arr[high]
                 arr[high] = pom
                 }
             }
@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
         {
             val low = arr.first()
             val high = arr.last()
-            if(low < high)
+
+            if(low >= high)
             {
                 val pivot = arr.size/2
                 var tab1: MutableList<Int> = mutableListOf()
